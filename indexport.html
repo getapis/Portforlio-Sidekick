@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geramel Tapis — Super Sidekick VA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0D0D1A;
+  --paper: #F7F5F0;
+  --cream: #EDE9E0;
+  --purple: #4F46BA;
+  --purple-dark: #1E1B4B;
+  --purple-light: #EEEDFE;
+  --teal: #0F6E56;
+  --teal-light: #E1F5EE;
+  --gold: #C9A84C;
+  --gray: #6B7280;
+  --border: #E2DDD4;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  overflow-x: hidden;
+  cursor: default;
+}
+
+::selection { background: var(--purple-light); color: var(--purple-dark); }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 99px; }
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 4rem;
+  background: rgba(247,245,240,0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 0.5px solid var(--border);
+  transition: padding 0.3s;
+}
+
+nav.scrolled { padding: 0.85rem 4rem; }
+
+.nav-logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.15rem;
+  color: var(--purple-dark);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.nav-logo span { color: var(--purple); }
+
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+
+.nav-links a {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--gray);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 1.5px;
+  background: var(--purple);
+  transition: width 0.25s;
+}
+
+.nav-links a:hover { color: var(--purple); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--paper) !important;
+  background: var(--purple-dark);
+  padding: 0.55rem 1.25rem;
+  border-radius: 99px;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: background 0.2s, transform 0.15s !important;
+}
+
+.nav-cta:hover { background: var(--purple) !important; transform: translateY(-1px); }
+.nav-cta::after { display: none !important; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 7rem 4rem 4rem;
+  gap: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: var(--purple-light);
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -10%;
+  left: 20%;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: var(--teal-light);
+  opacity: 0.4;
+  z-index: 0;
+}
+
+.hero-text { position: relative; z-index: 1; }
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--purple);
+  background: var(--purple-light);
+  padding: 0.4rem 1rem;
+  border-radius: 99px;
+  margin-bottom: 1.5rem;
+  animation: fadeUp 0.6s ease both;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--purple);
+}
+
+.hero-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(3rem, 6vw, 5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--purple-dark);
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+
+.hero-name em {
+  font-style: italic;
+  color: var(--purple);
+}
+
+.hero-tagline {
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: var(--gray);
+  line-height: 1.7;
+  margin: 1.25rem 0 2rem;
+  max-width: 480px;
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+
+.hero-tagline strong { color: var(--ink); font-weight: 500; }
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  animation: fadeUp 0.6s 0.3s ease both;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--paper);
+  background: var(--purple-dark);
+  padding: 0.8rem 1.75rem;
+  border-radius: 99px;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+  letter-spacing: 0.02em;
+}
+
+.btn-primary:hover { background: var(--purple); transform: translateY(-2px); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--purple-dark);
+  padding: 0.8rem 1.75rem;
+  border-radius: 99px;
+  text-decoration: none;
+  border: 1.5px solid var(--border);
+  transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  letter-spacing: 0.02em;
+}
+
+.btn-secondary:hover { border-color: var(--purple); color: var(--purple); transform: translateY(-2px); }
+
+.hero-stats {
+  display: flex;
+  gap: 2.5rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 0.5px solid var(--border);
+  animation: fadeUp 0.6s 0.4s ease both;
+}
+
+.stat-item { text-align: left; }
+.stat-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  color: var(--purple-dark);
+  line-height: 1;
+}
+.stat-label { font-size: 0.75rem; color: var(--gray); margin-top: 0.25rem; letter-spacing: 0.04em; }
+
+/* Hero visual */
+.hero-visual {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.8s 0.2s ease both;
+}
+
+.profile-card {
+  background: var(--paper);
+  border: 0.5px solid var(--border);
+  border-radius: 24px;
+  padding: 2.5rem;
+  max-width: 360px;
+  width: 100%;
+  box-shadow: 0 32px 64px rgba(79,70,186,0.08);
+  position: relative;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  color: white;
+  margin-bottom: 1.25rem;
+}
+
+.profile-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.4rem;
+  color: var(--purple-dark);
+  margin-bottom: 0.25rem;
+}
+
+.profile-role {
+  font-size: 0.8rem;
+  color: var(--purple);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.profile-location {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--gray);
+  margin-bottom: 1.5rem;
+}
+
+.profile-location svg { width: 14px; height: 14px; }
+
+.profile-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tag {
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 0.3rem 0.75rem;
+  border-radius: 99px;
+  letter-spacing: 0.03em;
+}
+
+.tag-purple { background: var(--purple-light); color: var(--purple-dark); }
+.tag-teal { background: var(--teal-light); color: var(--teal); }
+.tag-gold { background: #FEF3C7; color: #92400E; }
+
+.profile-divider { border: none; border-top: 0.5px solid var(--border); margin: 1.25rem 0; }
+
+.profile-meta { display: flex; flex-direction: column; gap: 0.6rem; }
+
+.meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+}
+
+.meta-label { color: var(--gray); }
+.meta-value { color: var(--ink); font-weight: 500; }
+
+.status-dot {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--teal);
+  font-weight: 500;
+}
+
+.status-dot::before {
+  content: '';
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--teal);
+  animation: pulse 2s infinite;
+}
+
+.floating-badge {
+  position: absolute;
+  top: -1rem;
+  right: -1rem;
+  background: var(--gold);
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 0.4rem 0.9rem;
+  border-radius: 99px;
+  letter-spacing: 0.04em;
+  box-shadow: 0 4px 12px rgba(201,168,76,0.3);
+}
+
+/* ── SECTIONS ── */
+section { padding: 6rem 4rem; }
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--purple);
+  margin-bottom: 1rem;
+}
+
+.section-eyebrow::before {
+  content: '';
+  width: 24px; height: 1.5px;
+  background: var(--purple);
+}
+
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--purple-dark);
+  margin-bottom: 1rem;
+}
+
+.section-sub {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--gray);
+  line-height: 1.7;
+  max-width: 560px;
+}
+
+/* ── ABOUT ── */
+.about { background: var(--cream); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  margin-top: 3.5rem;
+  align-items: start;
+}
+
+.about-text p {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--gray);
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+}
+
+.about-text p strong { color: var(--ink); font-weight: 500; }
+
+.about-text p em {
+  font-style: italic;
+  color: var(--purple);
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.05rem;
+}
+
+.values-list { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+
+.value-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--paper);
+  border-radius: 12px;
+  border: 0.5px solid var(--border);
+}
+
+.value-icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: var(--purple-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 16px;
+}
+
+.value-name { font-size: 0.85rem; font-weight: 500; color: var(--ink); margin-bottom: 0.15rem; }
+.value-desc { font-size: 0.78rem; color: var(--gray); line-height: 1.5; }
+
+/* ── PILLARS ── */
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 3.5rem;
+}
+
+.pillar-card {
+  background: var(--paper);
+  border: 0.5px solid var(--border);
+  border-radius: 20px;
+  padding: 2rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.pillar-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 20px 20px 0 0;
+}
+
+.pillar-card.admin::before { background: var(--purple); }
+.pillar-card.sales::before { background: var(--teal); }
+.pillar-card.content::before { background: var(--gold); }
+.pillar-card.numbers::before { background: #E24B4A; }
+
+.pillar-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(79,70,186,0.1); }
+
+.pillar-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 3rem;
+  color: var(--cream);
+  line-height: 1;
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+}
+
+.pillar-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 0.5rem;
+}
+
+.pillar-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem;
+  color: var(--purple-dark);
+  margin-bottom: 0.75rem;
+}
+
+.pillar-desc {
+  font-size: 0.85rem;
+  color: var(--gray);
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+}
+
+.pillar-skills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+.skill-tag {
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 0.25rem 0.65rem;
+  border-radius: 99px;
+  border: 0.5px solid var(--border);
+  color: var(--gray);
+  background: var(--cream);
+}
+
+/* ── EXPERIENCE ── */
+.experience { background: var(--cream); }
+
+.timeline { margin-top: 3.5rem; display: flex; flex-direction: column; gap: 0; }
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 2.5rem;
+  padding: 2rem 0;
+  border-top: 0.5px solid var(--border);
+  position: relative;
+}
+
+.timeline-item:last-child { border-bottom: 0.5px solid var(--border); }
+
+.timeline-period { padding-top: 0.25rem; }
+
+.timeline-dates {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--purple);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.25rem;
+}
+
+.timeline-company {
+  font-size: 0.8rem;
+  color: var(--gray);
+}
+
+.timeline-role {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.3rem;
+  color: var(--purple-dark);
+  margin-bottom: 0.75rem;
+}
+
+.timeline-desc {
+  font-size: 0.85rem;
+  color: var(--gray);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.timeline-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+
+.timeline-bullets li {
+  font-size: 0.82rem;
+  color: var(--gray);
+  line-height: 1.6;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.timeline-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--purple);
+}
+
+/* ── TOOLS ── */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-top: 3.5rem;
+}
+
+.tool-card {
+  background: var(--paper);
+  border: 0.5px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem 1rem;
+  text-align: center;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.tool-card:hover { transform: translateY(-3px); border-color: var(--purple); }
+
+.tool-icon {
+  font-size: 1.6rem;
+  margin-bottom: 0.6rem;
+  display: block;
+}
+
+.tool-name {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 0.2rem;
+}
+
+.tool-type {
+  font-size: 0.7rem;
+  color: var(--gray);
+}
+
+/* ── CONTACT ── */
+.contact {
+  background: var(--purple-dark);
+  color: white;
+}
+
+.contact .section-eyebrow { color: #A5B4FC; }
+.contact .section-eyebrow::before { background: #A5B4FC; }
+.contact .section-title { color: white; }
+.contact .section-sub { color: #C7D2FE; }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  margin-top: 3.5rem;
+  align-items: start;
+}
+
+.contact-info { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: rgba(255,255,255,0.05);
+  border: 0.5px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  transition: background 0.2s;
+}
+
+.contact-item:hover { background: rgba(255,255,255,0.08); }
+
+.contact-icon {
+  width: 38px; height: 38px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.contact-label { font-size: 0.72rem; color: #A5B4FC; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.2rem; }
+.contact-value { font-size: 0.9rem; color: white; font-weight: 400; text-decoration: none; }
+.contact-value:hover { color: #A5B4FC; }
+
+.contact-form { display: flex; flex-direction: column; gap: 1rem; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+.form-field { display: flex; flex-direction: column; gap: 0.4rem; }
+
+.form-field label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #A5B4FC;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.form-field input,
+.form-field textarea {
+  background: rgba(255,255,255,0.06);
+  border: 0.5px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  color: white;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder { color: rgba(255,255,255,0.3); }
+
+.form-field input:focus,
+.form-field textarea:focus { border-color: rgba(165,180,252,0.5); }
+
+.form-field textarea { height: 120px; resize: none; }
+
+.btn-form {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: white;
+  color: var(--purple-dark);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 0.9rem 2rem;
+  border-radius: 99px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  letter-spacing: 0.02em;
+  align-self: flex-start;
+}
+
+.btn-form:hover { background: var(--purple-light); transform: translateY(-2px); }
+
+/* ── FOOTER ── */
+footer {
+  padding: 2rem 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 0.5px solid rgba(255,255,255,0.1);
+  background: var(--purple-dark);
+}
+
+.footer-logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1rem;
+  color: white;
+}
+
+.footer-copy {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.4);
+}
+
+.footer-tagline {
+  font-size: 0.78rem;
+  color: #A5B4FC;
+  font-style: italic;
+  font-family: 'DM Serif Display', serif;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── MOBILE MENU ── */
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+  padding: 4px;
+}
+
+.menu-btn span {
+  display: block;
+  width: 22px; height: 1.5px;
+  background: var(--ink);
+  transition: 0.3s;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .menu-btn { display: flex; }
+  .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; gap: 3rem; }
+  .hero::before, .hero::after { display: none; }
+  .hero-visual { order: -1; }
+  .profile-card { max-width: 100%; }
+  section { padding: 4rem 1.5rem; }
+  .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .pillars-grid { grid-template-columns: 1fr; }
+  .timeline-item { grid-template-columns: 1fr; gap: 0.75rem; }
+  footer { padding: 1.5rem; flex-direction: column; gap: 0.75rem; text-align: center; }
+  .form-row { grid-template-columns: 1fr; }
+  .hero-stats { gap: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Geramel <span>Tapis</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#pillars">Services</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#contact" class="nav-cta">Hire me</a></li>
+  </ul>
+  <button class="menu-btn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-text">
+    <div class="hero-eyebrow">Available for hire &mdash; Super Sidekick VA</div>
+    <h1 class="hero-name">
+      Geramel<br><em>Tapis</em>
+    </h1>
+    <p class="hero-tagline">
+      A <strong>Customer Experience &amp; Quality Assurance professional</strong> with 6+ years of expertise — now channelling every skill into being the best General VA an Australian gym owner could ever have.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        Let's work together
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#experience" class="btn-secondary">View my work</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">6+</div>
+        <div class="stat-label">Years experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">15</div>
+        <div class="stat-label">Analysts led</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Industries served</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">AU</div>
+        <div class="stat-label">Market focused</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="profile-card">
+      <div class="floating-badge">Open to work</div>
+      <div class="profile-avatar">GT</div>
+      <div class="profile-name">Geramel Tapis</div>
+      <div class="profile-role">Super Sidekick VA &middot; CX &amp; QA</div>
+      <div class="profile-location">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Negros Oriental, Philippines
+      </div>
+      <div class="profile-tags">
+        <span class="tag tag-purple">Admin Sidekick</span>
+        <span class="tag tag-teal">Sales Sidekick</span>
+        <span class="tag tag-gold">Content</span>
+        <span class="tag tag-purple">Xero L1</span>
+        <span class="tag tag-teal">CX Operations</span>
+        <span class="tag tag-gold">QA Leadership</span>
+      </div>
+      <hr class="profile-divider">
+      <div class="profile-meta">
+        <div class="meta-row">
+          <span class="meta-label">Availability</span>
+          <span class="meta-value status-dot">Full-time</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Time zone</span>
+          <span class="meta-value">PHT / AEST overlap</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Email</span>
+          <span class="meta-value">tapisgeramel@gmail.com</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">LinkedIn</span>
+          <span class="meta-value">linkedin.com/in/gerameltapis</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="reveal">
+    <div class="section-eyebrow">About me</div>
+    <h2 class="section-title">The person behind<br>the work</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>
+        I hold a <strong>Bachelor of Science in Marine Engineering</strong> — but life had bigger plans for me. I chose people over machines, and what followed was six years of building something I'm genuinely proud of: a career in Customer Experience and Quality Assurance that took me from front-line support to leading a team of 15 analysts.
+      </p>
+      <p>
+        I've worked across <strong>telecom, e-commerce, fintech, and technical support</strong> — always in high-pressure, high-volume environments where mistakes cost real money and real relationships. That background makes me a different kind of VA.
+      </p>
+      <p>
+        I've navigated some of life's hardest moments — watching a parent battle cancer, losing my lola, overcoming my own personal battles. Every one of those experiences shaped how I show up for the people I work for. <em>This work is personal to me.</em>
+      </p>
+      <p>
+        Now I bring everything I've built to Australian gym and studio owners — as their <strong>Super Sidekick VA</strong>. The person who protects their time, stabilises their operations, and makes sure nothing slips through the cracks.
+      </p>
+    </div>
+    <div class="values-list reveal">
+      <div class="value-item">
+        <div class="value-icon">&#9679;</div>
+        <div>
+          <div class="value-name">Calm under pressure</div>
+          <div class="value-desc">Six years of high-volume CX operations means very little at work will ever shake me. I've been through harder.</div>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-icon">&#9670;</div>
+        <div>
+          <div class="value-name">Adaptable by nature</div>
+          <div class="value-desc">I don't need a perfect playbook. Give me the goal, give me the access — I'll figure out the rest.</div>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-icon">&#9632;</div>
+        <div>
+          <div class="value-name">Client-first always</div>
+          <div class="value-desc">I treat your gym like it's my own business to protect. Your time, your members, your revenue — all matter to me personally.</div>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-icon">&#9650;</div>
+        <div>
+          <div class="value-name">Proactive over reactive</div>
+          <div class="value-desc">I'm always asking "what's going to break before it breaks?" I don't wait for someone to tell me there's a fire.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section id="pillars">
+  <div class="reveal">
+    <div class="section-eyebrow">What I do</div>
+    <h2 class="section-title">Four pillars.<br>One Super Sidekick.</h2>
+    <p class="section-sub">Trained across all four areas of gym VA support — with Admin and Sales as my strongest pillars.</p>
+  </div>
+  <div class="pillars-grid">
+
+    <div class="pillar-card admin reveal">
+      <div class="pillar-num">01</div>
+      <div class="pillar-label">Strongest pillar</div>
+      <div class="pillar-title">Admin Sidekick</div>
+      <p class="pillar-desc">Billing management, failed payment follow-ups, member enquiries, calendar management, and EA support. My 6 years of CX operations means I handle high-volume admin without blinking.</p>
+      <div class="pillar-skills">
+        <span class="skill-tag">Member inbox</span>
+        <span class="skill-tag">Direct debit follow-up</span>
+        <span class="skill-tag">Escalation management</span>
+        <span class="skill-tag">Red Flag reports</span>
+        <span class="skill-tag">Fringe outreach</span>
+        <span class="skill-tag">Calendar management</span>
+      </div>
+    </div>
+
+    <div class="pillar-card sales reveal">
+      <div class="pillar-num">02</div>
+      <div class="pillar-label">Strong pillar</div>
+      <div class="pillar-title">Sales Sidekick</div>
+      <p class="pillar-desc">Lead follow-up via phone, chat, and email. CRM hygiene, pipeline management, and trial class follow-up sequences. Real outbound sales experience from real estate and e-commerce.</p>
+      <div class="pillar-skills">
+        <span class="skill-tag">Lead follow-up</span>
+        <span class="skill-tag">CRM management</span>
+        <span class="skill-tag">Outbound calls</span>
+        <span class="skill-tag">Sell-by-Chat</span>
+        <span class="skill-tag">Pipeline hygiene</span>
+        <span class="skill-tag">Trial conversion</span>
+      </div>
+    </div>
+
+    <div class="pillar-card content reveal">
+      <div class="pillar-num">03</div>
+      <div class="pillar-label">Growing pillar</div>
+      <div class="pillar-title">Content Sidekick</div>
+      <p class="pillar-desc">Social media scheduling, basic Canva design, and content calendar management. Website updates and maintaining gym-branded templates. Consistent weekly output per client brief.</p>
+      <div class="pillar-skills">
+        <span class="skill-tag">Social scheduling</span>
+        <span class="skill-tag">Canva design</span>
+        <span class="skill-tag">Content calendar</span>
+        <span class="skill-tag">Meta Business Suite</span>
+        <span class="skill-tag">Caption writing</span>
+        <span class="skill-tag">Community management</span>
+      </div>
+    </div>
+
+    <div class="pillar-card numbers reveal">
+      <div class="pillar-num">04</div>
+      <div class="pillar-label">Developing pillar</div>
+      <div class="pillar-title">Numbers Sidekick</div>
+      <p class="pillar-desc">Basic bookkeeping, Xero data entry, and Australian GST awareness. Monthly P&L summaries and revenue reconciliation. Xero Level 1 Certified Associate.</p>
+      <div class="pillar-skills">
+        <span class="skill-tag">Xero L1 Certified</span>
+        <span class="skill-tag">Bank reconciliation</span>
+        <span class="skill-tag">GST / BAS</span>
+        <span class="skill-tag">P&amp;L summaries</span>
+        <span class="skill-tag">Payroll support</span>
+        <span class="skill-tag">AU tax awareness</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience">
+  <div class="reveal">
+    <div class="section-eyebrow">Work history</div>
+    <h2 class="section-title">Built through real<br>pressure and performance</h2>
+  </div>
+
+  <div class="timeline">
+
+    <div class="timeline-item reveal">
+      <div class="timeline-period">
+        <div class="timeline-dates">Feb 2025 — Present</div>
+        <div class="timeline-company">Remote</div>
+      </div>
+      <div>
+        <div class="timeline-role">Fractional CX Support</div>
+        <p class="timeline-desc">Remote customer support across email and chat channels, maintaining service quality standards in a remote-first environment.</p>
+        <ul class="timeline-bullets">
+          <li>Resolved customer concerns while maintaining quality standards</li>
+          <li>Supported documentation, workflows, and process updates</li>
+          <li>Maintained productivity and response targets remotely</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-period">
+        <div class="timeline-dates">Jul 2019 — Mar 2025</div>
+        <div class="timeline-company">Alorica (Remote &amp; Hybrid)</div>
+      </div>
+      <div>
+        <div class="timeline-role">Customer Support &amp; QA Supervisor</div>
+        <p class="timeline-desc">Nearly 6 years at one of the world's largest BPO companies — growing from front-line associate to supervising a team of 15 Quality Analysts.</p>
+        <ul class="timeline-bullets">
+          <li>Led and coached a team of 15 QA analysts across multiple programs</li>
+          <li>Oversaw approximately 32 audits per QA daily across phone, chat, and email</li>
+          <li>Monitored interactions to ensure compliance, accuracy, and service quality</li>
+          <li>Identified trends and partnered with operations on improvement plans</li>
+          <li>Provided QA insights and performance reporting to leadership</li>
+          <li>Supported certification, onboarding, and mentorship programs</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-period">
+        <div class="timeline-dates">Sep 2022 — Apr 2023</div>
+        <div class="timeline-company">INS LLC — Real Estate (Remote)</div>
+      </div>
+      <div>
+        <div class="timeline-role">Customer Service &amp; Sales Support</div>
+        <p class="timeline-desc">Part-time outbound sales and CRM support for a US-based real estate company.</p>
+        <ul class="timeline-bullets">
+          <li>Conducted outbound calls to qualify leads and build rapport</li>
+          <li>Handled objections and maintained CRM documentation</li>
+          <li>Consistently met outreach targets</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-period">
+        <div class="timeline-dates">Jul 2020 — Jan 2023</div>
+        <div class="timeline-company">Empire Ecommerce / Wealth Accelerators</div>
+      </div>
+      <div>
+        <div class="timeline-role">E-commerce &amp; Virtual Support</div>
+        <p class="timeline-desc">Managed customer inquiries and operational support for Amazon and Facebook e-commerce channels.</p>
+        <ul class="timeline-bullets">
+          <li>Managed customer inquiries across Amazon and Facebook</li>
+          <li>Supported listings, orders, and inventory coordination</li>
+          <li>Conducted product research and maintained customer communications</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-period">
+        <div class="timeline-dates">Nov 2018 — Jul 2019</div>
+        <div class="timeline-company">Wish</div>
+      </div>
+      <div>
+        <div class="timeline-role">Customer Service Representative</div>
+        <p class="timeline-desc">Resolved order and refund issues via chat and email for one of the world's largest e-commerce platforms.</p>
+        <ul class="timeline-bullets">
+          <li>Handled high-volume order and refund enquiries</li>
+          <li>Maintained consistent service quality metrics</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-period">
+        <div class="timeline-dates">May 2018 — Nov 2018</div>
+        <div class="timeline-company">DIRECTV</div>
+      </div>
+      <div>
+        <div class="timeline-role">Technical Support Specialist</div>
+        <p class="timeline-desc">Phone-based technical troubleshooting for DIRECTV customers across the United States.</p>
+        <ul class="timeline-bullets">
+          <li>Diagnosed and resolved service issues via phone</li>
+          <li>Guided customers through technical solutions clearly and patiently</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools">
+  <div class="reveal">
+    <div class="section-eyebrow">Tech stack</div>
+    <h2 class="section-title">Tools I work with</h2>
+    <p class="section-sub">Comfortable across CRM, support, bookkeeping, and creative platforms — and a fast learner with anything new.</p>
+  </div>
+  <div class="tools-grid">
+    <div class="tool-card reveal">
+      <span class="tool-icon">&#128203;</span>
+      <div class="tool-name">Zendesk</div>
+      <div class="tool-type">CX / Support</div>
+    </div>
+    <div class="tool-card reveal">
+      <span class="tool-icon">&#9729;</span>
+      <div class="tool-name">Salesforce</div>
+      <div class="tool-type">CRM</div>
+    </div>
+    <div class="tool-card reveal">
+      <span class="tool-icon">&#128202;</span>
+      <div class="tool-name">Xero</div>
+      <div class="tool-type">Bookkeeping · L1</div>
+    </div>
+    <div class="tool-card reveal">
+      <span class="tool-icon">&#128233;</span>
+      <div class="tool-name">Slack</div>
+      <div class="tool-type">Communication</div>
+    </div>
+    <div class="tool-card reveal">
+      <span class="tool-icon">&#128196;</span>
+      <div class="tool-name">Google Workspace</div>
+      <div class="tool-type">Productivity</div>
+    </div>
+    <div class="tool-card reveal">
+      <span class="tool-icon">&#127912;</span>
+      <div class="tool-name">Canva</div>
+      <div class="tool-type">Design</div>
+    </div>
+    <div class="tool-card reveal">
+      <span class="tool-icon">&#128722;</span>
+      <div class="tool-name">Shopify</div>
+      <div class="tool-type">E-commerce</div>
+    </div>
+    <div class="tool-card reveal">
+      <span class="tool-icon">&#128666;</span>
+      <div class="tool-name">Amazon Seller</div>
+      <div class="tool-type">E-commerce</div>
+    </div>
+    <div class="tool-card reveal">
+      <span class="tool-icon">&#128241;</span>
+      <div class="tool-name">Meta Business</div>
+      <div class="tool-type">Social / Ads</div>
+    </div>
+    <div class="tool-card reveal">
+      <span class="tool-icon">&#128205;</span>
+      <div class="tool-name">Gorgias</div>
+      <div class="tool-type">E-commerce CX</div>
+    </div>
+    <div class="tool-card reveal">
+      <span class="tool-icon">&#128295;</span>
+      <div class="tool-name">MS Office</div>
+      <div class="tool-type">Productivity</div>
+    </div>
+    <div class="tool-card reveal">
+      <span class="tool-icon">&#128269;</span>
+      <div class="tool-name">QA Monitoring</div>
+      <div class="tool-type">Maestro / similar</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="reveal">
+    <div class="section-eyebrow">Get in touch</div>
+    <h2 class="section-title">Ready to be your<br>Super Sidekick</h2>
+    <p class="section-sub">You focus on your gym — I've got the rest. Let's talk about how I can protect your time and grow your business.</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <div class="contact-item">
+        <div class="contact-icon">&#9993;</div>
+        <div>
+          <div class="contact-label">Email</div>
+          <a href="mailto:tapisgeramel@gmail.com" class="contact-value">tapisgeramel@gmail.com</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">&#128279;</div>
+        <div>
+          <div class="contact-label">LinkedIn</div>
+          <a href="https://linkedin.com/in/gerameltapis" target="_blank" class="contact-value">linkedin.com/in/gerameltapis</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">&#127758;</div>
+        <div>
+          <div class="contact-label">Based in</div>
+          <span class="contact-value">Negros Oriental, Philippines</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">&#128336;</div>
+        <div>
+          <div class="contact-label">Time zone</div>
+          <span class="contact-value">PHT (UTC+8) — AEST overlap ✓</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">&#128313;</div>
+        <div>
+          <div class="contact-label">Availability</div>
+          <span class="contact-value">Full-time · Immediate start</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-field">
+            <label>Your name</label>
+            <input type="text" placeholder="Jake Mitchell" required>
+          </div>
+          <div class="form-field">
+            <label>Email address</label>
+            <input type="email" placeholder="jake@ironpeakgym.com.au" required>
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Gym or studio name</label>
+          <input type="text" placeholder="Iron Peak Gym, Melbourne">
+        </div>
+        <div class="form-field">
+          <label>What do you need most help with?</label>
+          <textarea placeholder="Tell me about your biggest pain points — inbox chaos, lead follow-ups, social media, bookkeeping..."></textarea>
+        </div>
+        <button type="submit" class="btn-form">
+          Send message
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Geramel Tapis</div>
+  <div class="footer-tagline">"You focus on your gym — I've got the rest."</div>
+  <div class="footer-copy">&copy; 2025 Geramel Tapis. All rights reserved.</div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.btn-form');
+  btn.textContent = 'Message sent!';
+  btn.style.background = '#E1F5EE';
+  btn.style.color = '#0F6E56';
+  setTimeout(() => {
+    btn.innerHTML = 'Send message <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+    btn.style.background = '';
+    btn.style.color = '';
+    e.target.reset();
+  }, 3000);
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>
