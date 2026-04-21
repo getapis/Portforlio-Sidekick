@@ -192,6 +192,9 @@ nav.scrolled{padding:0.8rem 5%;box-shadow:0 2px 20px rgba(0,0,0,0.06)}
 .form-field textarea{height:130px;resize:none}
 .btn-submit{display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;background:white;color:var(--purple-dark);font-family:"Outfit",sans-serif;font-size:0.9rem;font-weight:600;padding:0.95rem 2rem;border-radius:99px;border:none;cursor:pointer;transition:all 0.2s;align-self:flex-start;letter-spacing:0.02em}
 .btn-submit:hover{background:var(--purple-light);transform:translateY(-2px)}
+.btn-submit:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+[data-fs-success]{display:none}
+[data-fs-error]{display:none}
 
 /* FOOTER */
 footer{background:var(--purple-dark);border-top:1px solid rgba(255,255,255,0.08);padding:1.75rem 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
@@ -545,24 +548,48 @@ footer{background:var(--purple-dark);border-top:1px solid rgba(255,255,255,0.08)
       </div>
     </div>
     <div class="reveal reveal-delay-1">
-      <form class="contact-form" action="https://formspree.io/f/xzdyajze" method="POST">
+      <div data-fs-success style="display:none;background:#DCF5EE;border:1px solid #6EE7B7;border-radius:14px;padding:1.5rem 1.75rem;text-align:center;margin-bottom:1rem">
+          <p style="font-family:'Outfit',sans-serif;font-size:1rem;font-weight:600;color:#0D7A5F;margin-bottom:0.25rem">Message sent successfully!</p>
+          <p style="font-family:'Outfit',sans-serif;font-size:0.85rem;color:#065F46">Thank you for reaching out. I'll get back to you within 24 hours.</p>
+        </div>
+        <div data-fs-error style="display:none;background:#FEE2E2;border:1px solid #FCA5A5;border-radius:14px;padding:1rem 1.25rem;margin-bottom:1rem">
+          <p style="font-family:'Outfit',sans-serif;font-size:0.85rem;color:#991B1B">Oops! Something went wrong. Please try emailing me directly at tapisgeramel@gmail.com</p>
+        </div>
+        <form class="contact-form" id="contact-form">
         <div class="form-row">
-          <div class="form-field"><label>Your name</label><input type="text" placeholder="Jake Mitchell" required></div>
-          <div class="form-field"><label>Email address</label><input type="email" placeholder="jake@ironpeakgym.com.au" required></div>
+          <div class="form-field">
+            <label for="name">Your name</label>
+            <input type="text" id="name" name="name" placeholder="Jake Mitchell" required data-fs-field>
+            <span data-fs-error="name" style="font-size:0.75rem;color:#F87171;margin-top:0.25rem;display:block"></span>
+          </div>
+          <div class="form-field">
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" placeholder="jake@ironpeakgym.com.au" required data-fs-field>
+            <span data-fs-error="email" style="font-size:0.75rem;color:#F87171;margin-top:0.25rem;display:block"></span>
+          </div>
         </div>
-        <div class="form-field"><label>Gym or studio name</label><input type="text" placeholder="Iron Peak Gym, Melbourne"></div>
-        <div class="form-field"><label>I need most help with</label>
-          <select>
+        <div class="form-field">
+          <label for="gym">Gym or studio name</label>
+          <input type="text" id="gym" name="gym" placeholder="Iron Peak Gym, Melbourne" data-fs-field>
+        </div>
+        <div class="form-field">
+          <label for="pillar">I need most help with</label>
+          <select id="pillar" name="pillar" data-fs-field>
             <option value="" disabled selected>Select a pillar...</option>
-            <option>Admin Sidekick &mdash; inbox, billing, member enquiries</option>
-            <option>Sales Sidekick &mdash; lead follow-up, CRM, conversions</option>
-            <option>Content Sidekick &mdash; social media, Canva, scheduling</option>
-            <option>Numbers Sidekick &mdash; Xero, bookkeeping, reports</option>
-            <option>All of the above &mdash; full Super Sidekick support</option>
+            <option value="Admin Sidekick">Admin Sidekick &mdash; inbox, billing, member enquiries</option>
+            <option value="Sales Sidekick">Sales Sidekick &mdash; lead follow-up, CRM, conversions</option>
+            <option value="Content Sidekick">Content Sidekick &mdash; social media, Canva, scheduling</option>
+            <option value="Numbers Sidekick">Numbers Sidekick &mdash; Xero, bookkeeping, reports</option>
+            <option value="Full Super Sidekick">All of the above &mdash; full Super Sidekick support</option>
           </select>
+          <span data-fs-error="pillar" style="font-size:0.75rem;color:#F87171;margin-top:0.25rem;display:block"></span>
         </div>
-        <div class="form-field"><label>Tell me about your biggest challenge</label><textarea placeholder="What&apos;s taking up most of your time right now? What do you wish someone could just take off your plate?"></textarea></div>
-        <button type="submit" class="btn-submit" id="submit-btn">
+        <div class="form-field">
+          <label for="message">Tell me about your biggest challenge</label>
+          <textarea id="message" name="message" placeholder="What's taking up most of your time right now? What do you wish someone could just take off your plate?" required data-fs-field></textarea>
+          <span data-fs-error="message" style="font-size:0.75rem;color:#F87171;margin-top:0.25rem;display:block"></span>
+        </div>
+        <button type="submit" class="btn-submit" data-fs-submit-btn id="submit-btn">
           Send message
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
@@ -591,47 +618,8 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
-const form = document.querySelector('.contact-form');
-if (form) {
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const btn = document.getElementById('submit-btn');
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
-    btn.style.opacity = '0.7';
-    const data = new FormData(form);
-    try {
-      const res = await fetch('https://formspree.io/f/xzdyajze', {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      });
-      if (res.ok) {
-        btn.textContent = 'Message sent!';
-        btn.style.background = '#DCF5EE';
-        btn.style.color = '#0D7A5F';
-        btn.style.opacity = '1';
-        form.reset();
-        setTimeout(() => {
-          btn.innerHTML = 'Send message <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
-          btn.style.background = '';
-          btn.style.color = '';
-          btn.disabled = false;
-        }, 4000);
-      } else {
-        btn.textContent = 'Error — try emailing directly';
-        btn.style.background = '#FEE2E2';
-        btn.style.color = '#991B1B';
-        btn.style.opacity = '1';
-        btn.disabled = false;
-      }
-    } catch(err) {
-      btn.textContent = 'Error — try emailing directly';
-      btn.style.opacity = '1';
-      btn.disabled = false;
-    }
-  });
-}
+window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+formspree('initForm', { formElement: '#contact-form', formId: 'xzdyajze' });
 
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener("click", e => {
@@ -641,5 +629,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 </script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </body>
 </html>
